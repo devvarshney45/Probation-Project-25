@@ -1,0 +1,5 @@
+export const requireRole = (role) => (req, res, next) => {
+  if (!req.user) return res.status(401).json({ message: 'Unauthenticated' });
+  if (req.user.role !== role) return res.status(403).json({ message: `Access restricted to ${role}s` });
+  next();
+};
